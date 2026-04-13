@@ -63,12 +63,12 @@ function App() {
             {/* Right: Introduction */}
             <div className="reveal order-1 lg:order-2">
               <p className="text-primary-container text-sm font-semibold uppercase tracking-[0.2em] mb-4 font-label">Hello, I'm</p>
-              <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl font-extrabold leading-none tracking-tighter mb-6 uppercase text-neutral-900">
+              <h1 className="font-headline text-3xl sm:text-5xl md:text-6xl font-extrabold leading-none tracking-tighter mb-6 uppercase text-neutral-900">
                 Alvin <br />Ferdinand
               </h1>
               <div className="space-y-4 mb-10">
-                <p className="text-primary-container text-xl font-medium tracking-wide font-headline">Motion Graphic Designer</p>
-                <p className="text-neutral-500 text-lg md:text-xl font-light leading-relaxed max-w-lg">
+                <p className="text-primary-container text-lg sm:text-xl font-medium tracking-wide font-headline">Motion Graphic Designer</p>
+                <p className="text-neutral-500 text-base md:text-xl font-light leading-relaxed max-w-lg">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo maiores reprehenderit excepturi vel mollitia nesciunt quas assumenda, nemo et atque est consequatur quibusdam autem eaque.
                 </p>
               </div>
