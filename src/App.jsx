@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { main } from './js/main.js';
 
 function App() {
+  useEffect(() => {
+    const cleanup = main();
+    return cleanup;
+  }, []);
+
   return (
     <>
       <nav className="bg-white/80 backdrop-blur-xl fixed top-0 w-full z-50 shadow-lg shadow-black/5">
@@ -15,9 +21,18 @@ function App() {
             <a className="font-['Epilogue'] tracking-tight text-sm uppercase font-semibold text-neutral-500 hover:text-neutral-900 transition-colors duration-300" href="#contact">Contact</a>
           </div>
 
-          <button className="md:hidden text-neutral-900">
+          <button id="mobile-menu-btn" className="md:hidden text-neutral-900">
             <span className="material-symbols-outlined">menu</span>
           </button>
+        </div>
+        
+        {/* Mobile Menu */}
+        <div id="mobile-menu" className="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg flex-col border-t border-black/5">
+          <a className="p-4 border-b border-black/5 font-['Epilogue'] tracking-tight text-sm uppercase font-semibold text-neutral-900" href="#home">Home</a>
+          <a className="p-4 border-b border-black/5 font-['Epilogue'] tracking-tight text-sm uppercase font-semibold text-neutral-900" href="#works">Works</a>
+          <a className="p-4 border-b border-black/5 font-['Epilogue'] tracking-tight text-sm uppercase font-semibold text-neutral-900" href="#skills">Skills</a>
+          <a className="p-4 border-b border-black/5 font-['Epilogue'] tracking-tight text-sm uppercase font-semibold text-neutral-900" href="#testimonials">Testimonials</a>
+          <a className="p-4 border-b border-black/5 font-['Epilogue'] tracking-tight text-sm uppercase font-semibold text-neutral-900" href="#contact">Contact</a>
         </div>
       </nav>
 
@@ -28,12 +43,12 @@ function App() {
             {/* Left: Profile Photo */}
             <div className="flex justify-center fade-up order-2 lg:order-1">
               <div className="relative">
-                <div className="w-72 h-72 md:w-[22rem] md:h-[22rem] rounded-[2rem] overflow-hidden bg-neutral-100 border border-black/5 shadow-xl shadow-black/5 flex items-center justify-center">
+                <div className="w-72 h-72 md:w-[22rem] md:h-[22rem] rounded-[2rem] overflow-hidden flex items-center justify-center">
                   {/* Placeholder icon — ganti src di bawah ini dengan foto klien */}
                   <img
                     src="/img/WhatsApp Image 2026-04-13 at 17.17.40 (1).png"
                     alt="Alvin Ferdinand"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover scale-150 -translate-y-12"
                     id="hero-profile-photo"
                   />
                   {/* Ikon placeholder yang tampil saat belum ada foto
@@ -76,7 +91,7 @@ function App() {
             <div className="flex justify-between items-end mb-20 reveal">
               <div>
                 <h2 className="font-headline text-5xl md:text-7xl font-bold uppercase tracking-tighter text-neutral-900">My Projects</h2>
-                <p className="text-neutral-400 mt-4 font-label text-sm uppercase tracking-widest">06 works / 2023-2025</p>
+                <p className="text-neutral-400 mt-4 font-label text-sm uppercase tracking-widest">my Projects 2025-2026</p>
               </div>
               <div className="hidden md:block">
                 <div className="flex gap-4">
@@ -94,7 +109,8 @@ function App() {
               {/* Project Card 1 */}
               <div className="group cursor-pointer">
                 <div className="aspect-[4/5] bg-neutral-100 rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center">
-                  <span className="material-symbols-outlined text-neutral-300" style={{ fontSize: '80px', fontVariationSettings: "'FILL' 1" }}>image</span>
+                  <span className="material-symbols-outlined text-neutral-300 absolute -z-10" style={{ fontSize: '80px', fontVariationSettings: "'FILL' 1" }}>image</span>
+                  <video data-src="https://www.w3schools.com/html/mov_bbb.mp4" className="w-full h-full object-cover transition-opacity duration-500 opacity-60 group-hover:opacity-100" muted loop playsInline></video>
                   <div className="absolute bottom-4 left-4">
                     <span className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">3D MOTION</span>
                   </div>
@@ -106,7 +122,8 @@ function App() {
               {/* Project Card 2 */}
               <div className="group cursor-pointer md:translate-y-12">
                 <div className="aspect-[4/5] bg-neutral-100 rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center">
-                  <span className="material-symbols-outlined text-neutral-300" style={{ fontSize: '80px', fontVariationSettings: "'FILL' 1" }}>image</span>
+                  <span className="material-symbols-outlined text-neutral-300 absolute -z-10" style={{ fontSize: '80px', fontVariationSettings: "'FILL' 1" }}>image</span>
+                  <video data-src="https://www.w3schools.com/html/mov_bbb.mp4" className="w-full h-full object-cover transition-opacity duration-500 opacity-60 group-hover:opacity-100" muted loop playsInline></video>
                   <div className="absolute bottom-4 left-4">
                     <span className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">VFX</span>
                   </div>
@@ -118,7 +135,8 @@ function App() {
               {/* Project Card 3 */}
               <div className="group cursor-pointer">
                 <div className="aspect-[4/5] bg-neutral-100 rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center">
-                  <span className="material-symbols-outlined text-neutral-300" style={{ fontSize: '80px', fontVariationSettings: "'FILL' 1" }}>image</span>
+                  <span className="material-symbols-outlined text-neutral-300 absolute -z-10" style={{ fontSize: '80px', fontVariationSettings: "'FILL' 1" }}>image</span>
+                  <video data-src="https://www.w3schools.com/html/mov_bbb.mp4" className="w-full h-full object-cover transition-opacity duration-500 opacity-60 group-hover:opacity-100" muted loop playsInline></video>
                   <div className="absolute bottom-4 left-4">
                     <span className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">2D ANIMATION</span>
                   </div>
@@ -208,7 +226,6 @@ function App() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-20 reveal">
               <h2 className="font-headline text-5xl md:text-7xl font-bold uppercase tracking-tighter text-neutral-900 mb-4">What People Say</h2>
-              <p className="text-neutral-500 font-medium">Collaborations with industry leaders.</p>
             </div>
 
             <div className="space-y-8 stagger">
@@ -289,24 +306,18 @@ function App() {
                 <div className="space-y-8">
                   <div className="group cursor-pointer">
                     <p className="text-neutral-400 text-xs uppercase tracking-[0.2em] mb-2">Email Me</p>
-                    <a className="text-2xl md:text-3xl font-headline font-bold text-white hover:text-primary-container transition-colors" href="mailto:hello@alvindibuka.com">hello@alvindibuka.com</a>
-                  </div>
-                  <div className="group cursor-pointer">
-                    <p className="text-neutral-400 text-xs uppercase tracking-[0.2em] mb-2">Office</p>
-                    <p className="text-2xl md:text-3xl font-headline font-bold text-white">Cape Town, ZA</p>
+                    <a className="text-2xl md:text-3xl font-headline font-bold text-white hover:text-primary-container transition-colors" href="mailto:hello@alvindibuka.com">test@test.com</a>
                   </div>
                   <div className="pt-8">
                     <div className="flex gap-6">
-                      <a className="text-neutral-400 hover:text-primary-container transition-colors font-label uppercase text-sm tracking-widest" href="#">LinkedIn</a>
-                      <a className="text-neutral-400 hover:text-primary-container transition-colors font-label uppercase text-sm tracking-widest" href="#">Behance</a>
-                      <a className="text-neutral-400 hover:text-primary-container transition-colors font-label uppercase text-sm tracking-widest" href="#">Vimeo</a>
-                      <a className="text-neutral-400 hover:text-primary-container transition-colors font-label uppercase text-sm tracking-widest" href="#">Instagram</a>
+                      <a className="text-neutral-400 hover:text-primary-container transition-colors font-label uppercase text-sm tracking-widest" href="https://www.linkedin.com/in/alvin-ferdinand-17a15b340?utm_source=share_via&utm_content=profile&utm_medium=member_ios">LinkedIn</a>
+                      <a className="text-neutral-400 hover:text-primary-container transition-colors font-label uppercase text-sm tracking-widest" href="https://www.instagram.com/alvinfrd_?igsh=emp1aXBwbHp5Mm10&utm_source=qr">Instagram</a>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="fade-up">
-                <form className="space-y-12">
+                <form id="contact-form" className="space-y-12">
                   <div className="relative">
                     <input className="w-full bg-transparent border-0 border-b border-neutral-700 py-4 px-0 text-white focus:ring-0 focus:border-primary-container placeholder:text-neutral-600 transition-all font-label text-sm tracking-widest" id="name" placeholder="YOUR NAME" type="text" />
                   </div>
@@ -335,14 +346,12 @@ function App() {
       {/* Footer */}
       <footer className="bg-neutral-900 w-full py-12 px-8 border-t border-neutral-800">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 w-full">
-          <div className="text-lg font-bold text-white font-epilogue">ALVIN DIBUKA</div>
+          <div className="text-lg font-bold text-white font-epilogue">AlvinFerdinand</div>
           <div className="flex gap-8">
-            <a className="font-['Epilogue'] text-xs tracking-widest uppercase text-neutral-400 hover:text-orange-500 transition-colors duration-500" href="#">LinkedIn</a>
-            <a className="font-['Epilogue'] text-xs tracking-widest uppercase text-neutral-400 hover:text-orange-500 transition-colors duration-500" href="#">Behance</a>
-            <a className="font-['Epilogue'] text-xs tracking-widest uppercase text-neutral-400 hover:text-orange-500 transition-colors duration-500" href="#">Vimeo</a>
-            <a className="font-['Epilogue'] text-xs tracking-widest uppercase text-neutral-400 hover:text-orange-500 transition-colors duration-500" href="#">Instagram</a>
+            <a className="font-['Epilogue'] text-xs tracking-widest uppercase text-neutral-400 hover:text-orange-500 transition-colors duration-500" href="https://www.linkedin.com/in/alvin-ferdinand-17a15b340?utm_source=share_via&utm_content=profile&utm_medium=member_ios">LinkedIn</a>
+            <a className="font-['Epilogue'] text-xs tracking-widest uppercase text-neutral-400 hover:text-orange-500 transition-colors duration-500" href="https://www.instagram.com/alvinfrd_?igsh=emp1aXBwbHp5Mm10&utm_source=qr">Instagram</a>
           </div>
-          <div className="font-['Epilogue'] text-xs tracking-widest uppercase text-neutral-400">© 2026 Alvin Dibuka</div>
+          <div className="font-['Epilogue'] text-xs tracking-widest uppercase text-neutral-400">© 2026 Alvin Ferdinand</div>
         </div>
       </footer>
     </>
