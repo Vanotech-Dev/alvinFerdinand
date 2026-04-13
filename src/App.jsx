@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { main } from './js/main.js';
+import { testimonials } from './data/testimoni.js';
 
 function App() {
   useEffect(() => {
@@ -229,68 +230,25 @@ function App() {
             </div>
 
             <div className="space-y-8 stagger">
-              {/* Testimonial 1 */}
-              <div className="bg-[#FAFAF9] p-12 rounded-lg shadow-sm border border-black/5 hover:-translate-y-2 transition-transform duration-500">
-                <div className="flex gap-1 mb-8">
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                </div>
-                <p className="text-2xl md:text-3xl font-headline font-bold text-neutral-900 leading-tight mb-10">
-                  "Alvin's ability to turn abstract concepts into fluid, hypnotic motion is unparalleled. He truly brought our brand to life."
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white font-bold">JD</div>
-                  <div>
-                    <p className="text-neutral-900 font-bold uppercase text-xs tracking-widest">James Dalton</p>
-                    <p className="text-neutral-400 text-[10px] uppercase tracking-widest">Creative Director, NeoLab</p>
+              {testimonials.map((testimonial) => (
+                <div key={testimonial.id} className="bg-[#FAFAF9] p-12 rounded-lg shadow-sm border border-black/5 hover:-translate-y-2 transition-transform duration-500">
+                  <div className="flex gap-1 mb-8">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                    ))}
+                  </div>
+                  <p className="text-2xl md:text-3xl font-headline font-bold text-neutral-900 leading-tight mb-10">
+                    "{testimonial.text}"
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white font-bold">{testimonial.initials}</div>
+                    <div>
+                      <p className="text-neutral-900 font-bold uppercase text-xs tracking-widest">{testimonial.name}</p>
+                      <p className="text-neutral-400 text-[10px] uppercase tracking-widest">{testimonial.role}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Testimonial 2 */}
-              <div className="bg-[#FAFAF9] p-12 rounded-lg shadow-sm border border-black/5 hover:-translate-y-2 transition-transform duration-500">
-                <div className="flex gap-1 mb-8">
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                </div>
-                <p className="text-2xl md:text-3xl font-headline font-bold text-neutral-900 leading-tight mb-10">
-                  "Working with Alvin was a seamless process. His technical mastery in 3D rendering gave our product launch the premium feel it needed."
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white font-bold">SM</div>
-                  <div>
-                    <p className="text-neutral-900 font-bold uppercase text-xs tracking-widest">Sarah Miller</p>
-                    <p className="text-neutral-400 text-[10px] uppercase tracking-widest">Lead Designer, TechFlow</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Testimonial 3 */}
-              <div className="bg-[#FAFAF9] p-12 rounded-lg shadow-sm border border-black/5 hover:-translate-y-2 transition-transform duration-500">
-                <div className="flex gap-1 mb-8">
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined text-primary-container" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                </div>
-                <p className="text-2xl md:text-3xl font-headline font-bold text-neutral-900 leading-tight mb-10">
-                  "Sophisticated layouts, impeccable timing, and a great eye for detail. Alvin is a top-tier motion designer."
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white font-bold">AK</div>
-                  <div>
-                    <p className="text-neutral-900 font-bold uppercase text-xs tracking-widest">Alex Kovar</p>
-                    <p className="text-neutral-400 text-[10px] uppercase tracking-widest">Founder, Studio Void</p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
