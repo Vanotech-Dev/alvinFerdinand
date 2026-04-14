@@ -95,7 +95,7 @@ function App() {
       <main>
         {/* Hero Section */}
         <section
-          className="min-h-screen flex items-center pt-28 px-8 lg:pl-32 mb-10 bg-white overflow-hidden"
+          className="min-h-screen flex items-center pt-18 px-8 lg:pl-32 mb-10 bg-white overflow-hidden"
           id="home"
         >
           <div className="max-w-7xl mx-auto grid lg:grid-cols-[auto_1fr] gap-12 items-center w-full">
@@ -488,7 +488,7 @@ function App() {
                       Email Me
                     </p>
                     <a
-                      className="text-2xl md:text-3xl font-headline font-bold text-white hover:text-primary-container transition-colors"
+                      className="text-sm md:text-3xl font-headline font-bold text-white hover:text-primary-container transition-colors break-all"
                       href="mailto:alvinferdinand723@gmail.com"
                     >
                       alvinferdinand723@gmail.com
