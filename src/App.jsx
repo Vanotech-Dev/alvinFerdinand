@@ -95,7 +95,7 @@ function App() {
       <main>
         {/* Hero Section */}
         <section
-          className="min-h-screen flex items-center pt-28 px-8 lg:pl-32 bg-white overflow-hidden"
+          className="min-h-screen flex items-center pt-28 px-8 lg:pl-32 mb-10 bg-white overflow-hidden"
           id="home"
         >
           <div className="max-w-7xl mx-auto grid lg:grid-cols-[auto_1fr] gap-12 items-center w-full">
@@ -133,7 +133,7 @@ function App() {
                   Motion Graphic Designer
                 </p>
                 <p className="text-neutral-500 text-base md:text-xl font-light leading-relaxed max-w-2xl">
-                  Hi, I’m Alvin, a Motion Graphic Designer specializing in SaaS explainer videos and UI-driven motion design. I craft clean, modern visuals that simplify complex ideas through refined animation, minimal aesthetics, and purposeful storytelling—helping digital products communicate clearly, effectively, and with a premium feel. Focused on clarity, precision, and impact, I design motion that not only looks good, but works.
+                  i'm specializing in SaaS explainer videos and UI-driven motion design. I craft clean, modern visuals that simplify complex ideas through refined animation, minimal aesthetics, and purposeful storytelling—helping digital products communicate clearly, effectively, and with a premium feel. Focused on clarity, precision, and impact, I design motion that not only looks good, but works.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4">
