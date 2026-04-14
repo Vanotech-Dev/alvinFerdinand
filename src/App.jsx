@@ -489,9 +489,9 @@ function App() {
                     </p>
                     <a
                       className="text-2xl md:text-3xl font-headline font-bold text-white hover:text-primary-container transition-colors"
-                      href="mailto:hello@alvindibuka.com"
+                      href="mailto:alvinferdinand723@gmail.com"
                     >
-                      test@test.com
+                      alvinferdinand723@gmail.com
                     </a>
                   </div>
                   <div className="pt-8">
