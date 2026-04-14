@@ -1,10 +1,10 @@
 export const testimonials = [
   {
     id: 1,
-    text: "Alvin's ability to turn abstract concepts into fluid, hypnotic motion is unparalleled. He truly brought our brand to life.",
-    name: "James Dalton",
-    role: "Creative Director, NeoLab",
-    initials: "JD",
+    text: "Keren sekali, Dia membuatkan saya animasi untuk tugas kelompok yang bagus dan saya mendapatkan nilai 100.",
+    name: "James Angra",
+    role: "Mahasiswa",
+    initials: "JA",
   },
   {
     id: 2,
