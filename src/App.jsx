@@ -185,26 +185,39 @@ function App() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 stagger">
-              {/* Project Card 1 */}
+              {/* Project Card 1 — 3D Motion */}
               <div className="group cursor-pointer">
-                <div className="aspect-[4/5] bg-neutral-100 rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center">
-                  <span
-                    className="material-symbols-outlined text-neutral-300 absolute -z-10"
-                    style={{
-                      fontSize: "80px",
-                      fontVariationSettings: "'FILL' 1",
-                    }}
-                  >
-                    image
-                  </span>
+                <div className="project-thumbnail aspect-[4/5] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
+                  style={{ background: "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #FE7743 100%)" }}
+                >
+                  {/* Decorative bg elements */}
+                  <div className="absolute inset-0 opacity-10"
+                    style={{ backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)", backgroundSize: "32px 32px" }}
+                  ></div>
+                  <div className="absolute top-8 right-8 w-24 h-24 rounded-full blur-2xl" style={{ background: "#FE774340" }}></div>
+                  <div className="absolute bottom-16 left-6 w-16 h-16 rounded-full blur-xl" style={{ background: "#EFEEEA20" }}></div>
+
+                  {/* Icon cluster */}
+                  <div className="relative z-10 flex flex-col items-center gap-4 group-hover:scale-110 transition-transform duration-500">
+                    <div className="w-24 h-24 rounded-2xl backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500" style={{ background: "rgba(254,119,67,0.15)", borderColor: "rgba(254,119,67,0.2)" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: "48px", fontVariationSettings: "'FILL' 1", color: "#FE7743" }}>
+                        3d_rotation
+                      </span>
+                    </div>
+                    <span className="text-[10px] uppercase tracking-[0.3em] font-label" style={{ color: "#EFEEEA80" }}>3D Motion</span>
+                  </div>
+
+                  {/* Video (akan ditampilkan saat ada src) */}
                   <video
-                    data-src="https://www.w3schools.com/html/mov_bbb.mp4"
-                    className="w-full h-full object-cover transition-opacity duration-500 opacity-60 group-hover:opacity-100"
+                    data-src=""
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 hidden"
                     muted
                     loop
                     playsInline
                   ></video>
-                  <div className="absolute bottom-4 left-4">
+
+                  {/* Badge */}
+                  <div className="absolute bottom-4 left-4 z-20">
                     <span className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">
                       3D MOTION
                     </span>
@@ -218,26 +231,39 @@ function App() {
                 </p>
               </div>
 
-              {/* Project Card 2 */}
+              {/* Project Card 2 — VFX */}
               <div className="group cursor-pointer md:translate-y-12">
-                <div className="aspect-[4/5] bg-neutral-100 rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center">
-                  <span
-                    className="material-symbols-outlined text-neutral-300 absolute -z-10"
-                    style={{
-                      fontSize: "80px",
-                      fontVariationSettings: "'FILL' 1",
-                    }}
-                  >
-                    image
-                  </span>
+                <div className="project-thumbnail aspect-[4/5] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
+                  style={{ background: "linear-gradient(135deg, #000000 0%, #111111 50%, #EFEEEA 100%)" }}
+                >
+                  {/* Decorative bg elements */}
+                  <div className="absolute inset-0 opacity-10"
+                    style={{ backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)", backgroundSize: "32px 32px" }}
+                  ></div>
+                  <div className="absolute top-12 left-8 w-20 h-20 rounded-full blur-2xl" style={{ background: "#FE774330" }}></div>
+                  <div className="absolute bottom-12 right-8 w-28 h-28 rounded-full blur-2xl" style={{ background: "#EFEEEA25" }}></div>
+
+                  {/* Icon cluster */}
+                  <div className="relative z-10 flex flex-col items-center gap-4 group-hover:scale-110 transition-transform duration-500">
+                    <div className="w-24 h-24 rounded-2xl backdrop-blur-sm border flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500" style={{ background: "rgba(239,238,234,0.1)", borderColor: "rgba(239,238,234,0.15)" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: "48px", fontVariationSettings: "'FILL' 1", color: "#FE7743" }}>
+                        auto_awesome
+                      </span>
+                    </div>
+                    <span className="text-[10px] uppercase tracking-[0.3em] font-label" style={{ color: "#EFEEEA60" }}>Visual FX</span>
+                  </div>
+
+                  {/* Video */}
                   <video
-                    data-src="https://www.w3schools.com/html/mov_bbb.mp4"
-                    className="w-full h-full object-cover transition-opacity duration-500 opacity-60 group-hover:opacity-100"
+                    data-src=""
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 hidden"
                     muted
                     loop
                     playsInline
                   ></video>
-                  <div className="absolute bottom-4 left-4">
+
+                  {/* Badge */}
+                  <div className="absolute bottom-4 left-4 z-20">
                     <span className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">
                       VFX
                     </span>
@@ -251,26 +277,39 @@ function App() {
                 </p>
               </div>
 
-              {/* Project Card 3 */}
+              {/* Project Card 3 — 2D Animation */}
               <div className="group cursor-pointer">
-                <div className="aspect-[4/5] bg-neutral-100 rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center">
-                  <span
-                    className="material-symbols-outlined text-neutral-300 absolute -z-10"
-                    style={{
-                      fontSize: "80px",
-                      fontVariationSettings: "'FILL' 1",
-                    }}
-                  >
-                    image
-                  </span>
+                <div className="project-thumbnail aspect-[4/5] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
+                  style={{ background: "linear-gradient(135deg, #FE7743 0%, #c45a30 40%, #000000 100%)" }}
+                >
+                  {/* Decorative bg elements */}
+                  <div className="absolute inset-0 opacity-10"
+                    style={{ backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)", backgroundSize: "32px 32px" }}
+                  ></div>
+                  <div className="absolute top-10 right-10 w-20 h-20 rounded-full blur-2xl" style={{ background: "#EFEEEA30" }}></div>
+                  <div className="absolute bottom-20 left-10 w-24 h-24 rounded-full blur-2xl" style={{ background: "#00000040" }}></div>
+
+                  {/* Icon cluster */}
+                  <div className="relative z-10 flex flex-col items-center gap-4 group-hover:scale-110 transition-transform duration-500">
+                    <div className="w-24 h-24 rounded-2xl backdrop-blur-sm border flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500" style={{ background: "rgba(0,0,0,0.3)", borderColor: "rgba(239,238,234,0.2)" }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: "48px", fontVariationSettings: "'FILL' 1", color: "#EFEEEA" }}>
+                        animation
+                      </span>
+                    </div>
+                    <span className="text-[10px] uppercase tracking-[0.3em] font-label" style={{ color: "#EFEEEA80" }}>2D Anim</span>
+                  </div>
+
+                  {/* Video */}
                   <video
-                    data-src="https://www.w3schools.com/html/mov_bbb.mp4"
-                    className="w-full h-full object-cover transition-opacity duration-500 opacity-60 group-hover:opacity-100"
+                    data-src=""
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 hidden"
                     muted
                     loop
                     playsInline
                   ></video>
-                  <div className="absolute bottom-4 left-4">
+
+                  {/* Badge */}
+                  <div className="absolute bottom-4 left-4 z-20">
                     <span className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">
                       2D ANIMATION
                     </span>
