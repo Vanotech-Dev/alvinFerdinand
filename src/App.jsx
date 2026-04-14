@@ -224,10 +224,10 @@ function App() {
                   </div>
                 </div>
                 <h3 className="text-2xl font-headline font-bold uppercase mb-1 text-neutral-900">
-                  Lorem, ipsum.
+                  Project 1
                 </h3>
                 <p className="text-neutral-400 font-label text-xs uppercase tracking-widest">
-                  Lorem ipsum dolor sit amet consectetur.
+                  Ini Project 1
                 </p>
               </div>
 
@@ -270,10 +270,10 @@ function App() {
                   </div>
                 </div>
                 <h3 className="text-2xl font-headline font-bold uppercase mb-1 text-neutral-900">
-                  Lorem, ipsum dolor.
+                  Project 2
                 </h3>
                 <p className="text-neutral-400 font-label text-xs uppercase tracking-widest">
-                  Lorem ipsum dolor sit amet.
+                  Ini Project 2
                 </p>
               </div>
 
@@ -316,10 +316,10 @@ function App() {
                   </div>
                 </div>
                 <h3 className="text-2xl font-headline font-bold uppercase mb-1 text-neutral-900">
-                  Lorem ipsum dolor sit.
+                  Project 3
                 </h3>
                 <p className="text-neutral-400 font-label text-xs uppercase tracking-widest">
-                  Lorem ipsum dolor sit amet.
+                  Ini Project 3
                 </p>
               </div>
             </div>
@@ -422,7 +422,6 @@ function App() {
                 <span className="text-4xl md:text-6xl font-headline font-black text-black/10 whitespace-nowrap">
                   ILLUSTRATOR
                 </span>
-                <span className="w-4 h-4 bg-primary-container rounded-full"></span>
                 <span className="w-4 h-4 bg-primary-container rounded-full"></span>
               </div>
             </div>
