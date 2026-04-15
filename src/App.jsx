@@ -95,7 +95,7 @@ function App() {
       <main>
         {/* Hero Section */}
         <section
-          className="min-h-screen flex items-center pt-18 px-8 lg:pl-32 mb-10 bg-white overflow-hidden"
+          className="min-h-screen flex items-center pt-20 px-8 lg:pl-32 mb-10 bg-white overflow-hidden"
           id="home"
         >
           <div className="max-w-7xl mx-auto grid lg:grid-cols-[auto_1fr] gap-12 items-center w-full">
@@ -124,11 +124,11 @@ function App() {
               <p className="text-primary-container text-sm font-semibold uppercase tracking-[0.2em] mb-4 font-label">
                 Hello, I'm
               </p>
-              <h1 className="font-headline text-3xl sm:text-5xl md:text-6xl font-extrabold leading-none tracking-tighter mb-6 uppercase text-neutral-900">
+              <h1 className="font-headline text-3xl sm:text-5xl md:text-6xl font-extrabold leading-none tracking-tighter mb-3 uppercase text-neutral-900">
                 Alvin <br />
                 Ferdinand
               </h1>
-              <div className="space-y-4 mb-10">
+              <div className="space-y-4 mb-5">
                 <p className="text-primary-container text-lg sm:text-xl font-medium tracking-wide font-headline">
                   Motion Graphic Designer
                 </p>
