@@ -44,7 +44,7 @@ const projectsData = [
   {
     id: 3,
     title: "Project 3",
-    category: "Showreel",
+    category: "",
     videoSrc: "",
     bgGradient: "linear-gradient(135deg, #FE7743 0%, #c45a30 40%, #000000 100%)",
     blur1Class: "absolute top-10 right-10 w-20 h-20 rounded-full blur-2xl",
@@ -366,7 +366,7 @@ function App() {
                       {/* Video */}
                       <video
                         src={project.videoSrc}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 ${!project.videoSrc ? 'hidden' : ''}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 group-hover:z-20 ${!project.videoSrc ? 'hidden' : ''}`}
                         muted
                         loop
                         autoPlay
