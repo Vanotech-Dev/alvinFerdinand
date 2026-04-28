@@ -1,8 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { main } from "./js/main.js";
 import { testimonials } from "./data/testimoni.js";
 
 function App() {
+  const [videoState, setVideoState] = useState({ src: null, rect: null, isExpanding: false });
+  const [expandedDesc, setExpandedDesc] = useState({});
+
+  const toggleDesc = (e, id) => {
+    e.stopPropagation();
+    setExpandedDesc(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+  const handleVideoClick = (e, src) => {
+    // Cari elemen thumbnail di dalam card yang diklik
+    const thumbnail = e.currentTarget.querySelector('.project-thumbnail') || e.currentTarget;
+    const rect = thumbnail.getBoundingClientRect();
+    setVideoState({ src, rect, isExpanding: false });
+
+    // Memberikan jeda sebelum transisi agar posisi awal di-render terlebih dahulu
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setVideoState(prev => ({ ...prev, isExpanding: true }));
+      });
+    });
+  };
+  const closeVideo = () => {
+    setVideoState(prev => ({ ...prev, isExpanding: false }));
+    // Menunggu transisi selesai sebelum menghapus elemen
+    setTimeout(() => {
+      setVideoState({ src: null, rect: null, isExpanding: false });
+    }, 500); // 500ms mengikuti duration-500 Tailwind
+  };
+
+
   useEffect(() => {
     const cleanup = main();
     return cleanup;
@@ -11,7 +40,7 @@ function App() {
   return (
     <>
       <nav className="bg-white/80 backdrop-blur-xl fixed top-0 w-full z-50 shadow-lg shadow-black/5">
-        <div className="flex justify-between items-center px-8 py-6 max-w-full mx-auto">
+        <div className="flex justify-between items-center px-8 py-6 max-w-full mx-auto ">
           <div className="text-2xl font-black tracking-tighter text-neutral-900 font-epilogue">
             AlvinFerdinand
           </div>
@@ -95,14 +124,14 @@ function App() {
       <main>
         {/* Hero Section */}
         <section
-          className="min-h-screen flex items-center pt-20 px-8 lg:pl-32 mb-10 bg-white overflow-hidden"
+          className="min-h-screen flex items-center pt-20 px-8 mt-3 lg:pl-32 mb-10 bg-white overflow-hidden"
           id="home"
         >
           <div className="max-w-7xl mx-auto grid lg:grid-cols-[auto_1fr] gap-12 items-center w-full">
             {/* Left: Profile Photo */}
             <div className="flex justify-center fade-up order-2 lg:order-1">
               <div className="relative">
-                <div className="w-72 h-72 md:w-[22rem] md:h-[22rem] rounded-[2rem] overflow-hidden flex items-center justify-center">
+                <div className="relative -z-30 w-72 h-80 md:w-[22rem] md:h-[22rem] rounded-[2rem] overflow-hidden flex items-center justify-center border-4 border-amber-600">
                   {/* Placeholder icon — ganti src di bawah ini dengan foto klien */}
                   <img
                     src="/img/WhatsApp Image 2026-04-13 at 17.17.40 (1).png"
@@ -133,7 +162,13 @@ function App() {
                   Motion Graphic Designer
                 </p>
                 <p className="text-neutral-500 text-base md:text-xl font-light leading-relaxed max-w-2xl">
-                  i'm specializing in SaaS explainer videos and UI-driven motion design. I craft clean, modern visuals that simplify complex ideas through refined animation, minimal aesthetics, and purposeful storytelling—helping digital products communicate clearly, effectively, and with a premium feel. Focused on clarity, precision, and impact, I design motion that not only looks good, but works.
+                  i'm specializing in SaaS explainer videos and UI-driven motion
+                  design. I craft clean, modern visuals that simplify complex
+                  ideas through refined animation, minimal aesthetics, and
+                  purposeful storytelling—helping digital products communicate
+                  clearly, effectively, and with a premium feel. Focused on
+                  clarity, precision, and impact, I design motion that not only
+                  looks good, but works.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4">
@@ -183,33 +218,70 @@ function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 stagger">
               {/* Project Card 1 — 3D Motion */}
-              <div className="group cursor-pointer">
-                <div className="project-thumbnail aspect-[4/5] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #FE7743 100%)" }}
+              <div
+                className="group cursor-pointer"
+                onClick={(e) => handleVideoClick(e, "/Project/alvinProject-1.mp4")}
+              >
+                <div
+                  className="project-thumbnail aspect-[16/9] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #FE7743 100%)",
+                  }}
                 >
                   {/* Decorative bg elements */}
-                  <div className="absolute inset-0 opacity-10"
-                    style={{ backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)", backgroundSize: "32px 32px" }}
+                  <div
+                    className="absolute inset-0 opacity-10"
+                    style={{
+                      backgroundImage:
+                        "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)",
+                      backgroundSize: "32px 32px",
+                    }}
                   ></div>
-                  <div className="absolute top-8 right-8 w-24 h-24 rounded-full blur-2xl" style={{ background: "#FE774340" }}></div>
-                  <div className="absolute bottom-16 left-6 w-16 h-16 rounded-full blur-xl" style={{ background: "#EFEEEA20" }}></div>
+                  <div
+                    className="absolute top-8 right-8 w-24 h-24 rounded-full blur-2xl"
+                    style={{ background: "#FE774340" }}
+                  ></div>
+                  <div
+                    className="absolute bottom-16 left-6 w-16 h-16 rounded-full blur-xl"
+                    style={{ background: "#EFEEEA20" }}
+                  ></div>
 
                   {/* Icon cluster */}
                   <div className="relative z-10 flex flex-col items-center gap-4 group-hover:scale-110 transition-transform duration-500">
-                    <div className="w-24 h-24 rounded-2xl backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500" style={{ background: "rgba(254,119,67,0.15)", borderColor: "rgba(254,119,67,0.2)" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "48px", fontVariationSettings: "'FILL' 1", color: "#FE7743" }}>
+                    <div
+                      className="w-24 h-24 rounded-2xl backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500"
+                      style={{
+                        background: "rgba(254,119,67,0.15)",
+                        borderColor: "rgba(254,119,67,0.2)",
+                      }}
+                    >
+                      <span
+                        className="material-symbols-outlined"
+                        style={{
+                          fontSize: "48px",
+                          fontVariationSettings: "'FILL' 1",
+                          color: "#FE7743",
+                        }}
+                      >
                         3d_rotation
                       </span>
                     </div>
-                    <span className="text-[10px] uppercase tracking-[0.3em] font-label" style={{ color: "#EFEEEA80" }}>3D Motion</span>
+                    <span
+                      className="text-[10px] uppercase tracking-[0.3em] font-label"
+                      style={{ color: "#EFEEEA80" }}
+                    >
+                      3D Motion
+                    </span>
                   </div>
 
                   {/* Video (akan ditampilkan saat ada src) */}
                   <video
-                    data-src=""
-                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 hidden"
+                    src="/Project/alvinProject-1.mp4"
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                     muted
                     loop
+                    autoPlay
                     playsInline
                   ></video>
 
@@ -223,31 +295,72 @@ function App() {
                 <h3 className="text-2xl font-headline font-bold uppercase mb-1 text-neutral-900">
                   Project 1
                 </h3>
-                <p className="text-neutral-400 font-label text-xs uppercase tracking-widest">
-                  Ini Project 1
-                </p>
+                <div
+                  className="text-neutral-400 font-label text-xs tracking-widest leading-relaxed mt-2"
+                  onClick={(e) => toggleDesc(e, 1)}
+                >
+                  <p className={`transition-all duration-300 ${expandedDesc[1] ? '' : 'line-clamp-2'}`}>
+                    Ledgr is a simple and powerful transaction tracker that helps you monitor your finances and grow your money with clarity and control.
+                  </p>
+                  <span className="text-orange-500 font-bold hover:text-orange-600 transition-colors cursor-pointer mt-1 inline-block uppercase text-[10px]">
+                    {expandedDesc[1] ? "Show Less" : "Read More"}
+                  </span>
+                </div>
               </div>
 
               {/* Project Card 2 — VFX */}
               <div className="group cursor-pointer md:translate-y-12">
-                <div className="project-thumbnail aspect-[4/5] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, #000000 0%, #111111 50%, #EFEEEA 100%)" }}
+                <div
+                  className="project-thumbnail aspect-[16/9] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #000000 0%, #111111 50%, #EFEEEA 100%)",
+                  }}
                 >
                   {/* Decorative bg elements */}
-                  <div className="absolute inset-0 opacity-10"
-                    style={{ backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)", backgroundSize: "32px 32px" }}
+                  <div
+                    className="absolute inset-0 opacity-10"
+                    style={{
+                      backgroundImage:
+                        "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)",
+                      backgroundSize: "32px 32px",
+                    }}
                   ></div>
-                  <div className="absolute top-12 left-8 w-20 h-20 rounded-full blur-2xl" style={{ background: "#FE774330" }}></div>
-                  <div className="absolute bottom-12 right-8 w-28 h-28 rounded-full blur-2xl" style={{ background: "#EFEEEA25" }}></div>
+                  <div
+                    className="absolute top-12 left-8 w-20 h-20 rounded-full blur-2xl"
+                    style={{ background: "#FE774330" }}
+                  ></div>
+                  <div
+                    className="absolute bottom-12 right-8 w-28 h-28 rounded-full blur-2xl"
+                    style={{ background: "#EFEEEA25" }}
+                  ></div>
 
                   {/* Icon cluster */}
                   <div className="relative z-10 flex flex-col items-center gap-4 group-hover:scale-110 transition-transform duration-500">
-                    <div className="w-24 h-24 rounded-2xl backdrop-blur-sm border flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500" style={{ background: "rgba(239,238,234,0.1)", borderColor: "rgba(239,238,234,0.15)" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "48px", fontVariationSettings: "'FILL' 1", color: "#FE7743" }}>
+                    <div
+                      className="w-24 h-24 rounded-2xl backdrop-blur-sm border flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500"
+                      style={{
+                        background: "rgba(239,238,234,0.1)",
+                        borderColor: "rgba(239,238,234,0.15)",
+                      }}
+                    >
+                      <span
+                        className="material-symbols-outlined"
+                        style={{
+                          fontSize: "48px",
+                          fontVariationSettings: "'FILL' 1",
+                          color: "#FE7743",
+                        }}
+                      >
                         auto_awesome
                       </span>
                     </div>
-                    <span className="text-[10px] uppercase tracking-[0.3em] font-label" style={{ color: "#EFEEEA60" }}>Visual FX</span>
+                    <span
+                      className="text-[10px] uppercase tracking-[0.3em] font-label"
+                      style={{ color: "#EFEEEA60" }}
+                    >
+                      Visual FX
+                    </span>
                   </div>
 
                   {/* Video */}
@@ -269,31 +382,72 @@ function App() {
                 <h3 className="text-2xl font-headline font-bold uppercase mb-1 text-neutral-900">
                   Project 2
                 </h3>
-                <p className="text-neutral-400 font-label text-xs uppercase tracking-widest">
-                  Ini Project 2
-                </p>
+                <div
+                  className="text-neutral-400 font-label text-xs tracking-widest leading-relaxed mt-2"
+                  onClick={(e) => toggleDesc(e, 2)}
+                >
+                  <p className={`transition-all duration-300 ${expandedDesc[2] ? '' : 'line-clamp-2'}`}>
+                    Ini adalah Project 2. Fokus utama dari proyek ini adalah Visual Effects (VFX) dan compositing. Kami menggabungkan rekaman dunia nyata dengan elemen CGI untuk menciptakan pemandangan yang terlihat sangat realistis dan menyatu dengan sempurna. Detail pencahayaan dan tekstur sangat diperhatikan.
+                  </p>
+                  <span className="text-orange-500 font-bold hover:text-orange-600 transition-colors cursor-pointer mt-1 inline-block uppercase text-[10px]">
+                    {expandedDesc[2] ? "Show Less" : "Read More"}
+                  </span>
+                </div>
               </div>
 
               {/* Project Card 3 — 2D Animation */}
               <div className="group cursor-pointer">
-                <div className="project-thumbnail aspect-[4/5] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, #FE7743 0%, #c45a30 40%, #000000 100%)" }}
+                <div
+                  className="project-thumbnail aspect-[16/9] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #FE7743 0%, #c45a30 40%, #000000 100%)",
+                  }}
                 >
                   {/* Decorative bg elements */}
-                  <div className="absolute inset-0 opacity-10"
-                    style={{ backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)", backgroundSize: "32px 32px" }}
+                  <div
+                    className="absolute inset-0 opacity-10"
+                    style={{
+                      backgroundImage:
+                        "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)",
+                      backgroundSize: "32px 32px",
+                    }}
                   ></div>
-                  <div className="absolute top-10 right-10 w-20 h-20 rounded-full blur-2xl" style={{ background: "#EFEEEA30" }}></div>
-                  <div className="absolute bottom-20 left-10 w-24 h-24 rounded-full blur-2xl" style={{ background: "#00000040" }}></div>
+                  <div
+                    className="absolute top-10 right-10 w-20 h-20 rounded-full blur-2xl"
+                    style={{ background: "#EFEEEA30" }}
+                  ></div>
+                  <div
+                    className="absolute bottom-20 left-10 w-24 h-24 rounded-full blur-2xl"
+                    style={{ background: "#00000040" }}
+                  ></div>
 
                   {/* Icon cluster */}
                   <div className="relative z-10 flex flex-col items-center gap-4 group-hover:scale-110 transition-transform duration-500">
-                    <div className="w-24 h-24 rounded-2xl backdrop-blur-sm border flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500" style={{ background: "rgba(0,0,0,0.3)", borderColor: "rgba(239,238,234,0.2)" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "48px", fontVariationSettings: "'FILL' 1", color: "#EFEEEA" }}>
+                    <div
+                      className="w-24 h-24 rounded-2xl backdrop-blur-sm border flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500"
+                      style={{
+                        background: "rgba(0,0,0,0.3)",
+                        borderColor: "rgba(239,238,234,0.2)",
+                      }}
+                    >
+                      <span
+                        className="material-symbols-outlined"
+                        style={{
+                          fontSize: "48px",
+                          fontVariationSettings: "'FILL' 1",
+                          color: "#EFEEEA",
+                        }}
+                      >
                         animation
                       </span>
                     </div>
-                    <span className="text-[10px] uppercase tracking-[0.3em] font-label" style={{ color: "#EFEEEA80" }}>2D Anim</span>
+                    <span
+                      className="text-[10px] uppercase tracking-[0.3em] font-label"
+                      style={{ color: "#EFEEEA80" }}
+                    >
+                      2D Anim
+                    </span>
                   </div>
 
                   {/* Video */}
@@ -315,9 +469,17 @@ function App() {
                 <h3 className="text-2xl font-headline font-bold uppercase mb-1 text-neutral-900">
                   Project 3
                 </h3>
-                <p className="text-neutral-400 font-label text-xs uppercase tracking-widest">
-                  Ini Project 3
-                </p>
+                <div
+                  className="text-neutral-400 font-label text-xs tracking-widest leading-relaxed mt-2"
+                  onClick={(e) => toggleDesc(e, 3)}
+                >
+                  <p className={`transition-all duration-300 ${expandedDesc[3] ? '' : 'line-clamp-2'}`}>
+                    Ini adalah Project 3. Sebuah karya 2D Animation yang menceritakan narasi brand melalui animasi vektor yang fluid dan ekspresif. Kami menggunakan teknik keyframing yang teliti untuk memastikan setiap gerakan karakter dan objek terasa hidup, organik, dan penuh dengan kepribadian.
+                  </p>
+                  <span className="text-orange-500 font-bold hover:text-orange-600 transition-colors cursor-pointer mt-1 inline-block uppercase text-[10px]">
+                    {expandedDesc[3] ? "Show Less" : "Read More"}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -590,6 +752,50 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* Video Modal */}
+      {videoState.src && (
+        <div
+          className={`fixed inset-0 z-[100] transition-opacity duration-500 cursor-pointer ${videoState.isExpanding ? "bg-black/90 backdrop-blur-md opacity-100" : "bg-transparent opacity-0"
+            }`}
+          onClick={closeVideo}
+        >
+          <video
+            src={videoState.src}
+            className="absolute object-cover rounded-xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-[0_0_50px_rgba(0,0,0,0.5)] z-[101]"
+            style={
+              videoState.isExpanding
+                ? {
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: "90vw",
+                  height: "85vh",
+                  objectFit: "contain",
+                }
+                : {
+                  top: videoState.rect?.top || 0,
+                  left: videoState.rect?.left || 0,
+                  width: videoState.rect?.width || 0,
+                  height: videoState.rect?.height || 0,
+                  transform: "translate(0, 0)",
+                  objectFit: "cover",
+                  borderRadius: "inherit"
+                }
+            }
+            autoPlay
+            controls={videoState.isExpanding}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            className={`absolute top-6 right-10 text-white hover:text-orange-500 transition-all duration-500 z-[102] ${videoState.isExpanding ? "opacity-100 scale-100" : "opacity-0 scale-50"
+              }`}
+            onClick={closeVideo}
+          >
+            <span className="material-symbols-outlined text-4xl">close</span>
+          </button>
+        </div>
+      )}
     </>
   );
 }
