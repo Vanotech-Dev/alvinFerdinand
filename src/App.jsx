@@ -1,10 +1,88 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import gsap from "gsap";
 import { main } from "./js/main.js";
 import { testimonials } from "./data/testimoni.js";
+
+
+const projectsData = [
+  {
+    id: 1,
+    title: "Ledgr",
+    category: "Commercial",
+    videoSrc: "/Project/alvinProject-1.mp4",
+    bgGradient: "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #FE7743 100%)",
+    blur1Class: "absolute top-8 right-8 w-24 h-24 rounded-full blur-2xl",
+    blur1Bg: "#FE774340",
+    blur2Class: "absolute bottom-16 left-6 w-16 h-16 rounded-full blur-xl",
+    blur2Bg: "#EFEEEA20",
+    iconBg: "rgba(254,119,67,0.15)",
+    iconBorder: "rgba(254,119,67,0.2)",
+    iconColor: "#FE7743",
+    iconName: "3d_rotation",
+    tagLabel: "3D Motion",
+    badgeLabel: "3D MOTION",
+    desc: "Ledgr is a simple and powerful transaction tracker that helps you monitor your finances and grow your money with clarity and control."
+  },
+  {
+    id: 2,
+    title: "Project 2",
+    category: "Showreel",
+    videoSrc: "",
+    bgGradient: "linear-gradient(135deg, #000000 0%, #111111 50%, #EFEEEA 100%)",
+    blur1Class: "absolute top-12 left-8 w-20 h-20 rounded-full blur-2xl",
+    blur1Bg: "#FE774330",
+    blur2Class: "absolute bottom-12 right-8 w-28 h-28 rounded-full blur-2xl",
+    blur2Bg: "#EFEEEA25",
+    iconBg: "rgba(239,238,234,0.1)",
+    iconBorder: "rgba(239,238,234,0.15)",
+    iconColor: "#FE7743",
+    iconName: "auto_awesome",
+    tagLabel: "Visual FX",
+    badgeLabel: "VFX",
+    desc: "Ini adalah Project 2. Fokus utama dari proyek ini adalah Visual Effects (VFX) dan compositing. Kami menggabungkan rekaman dunia nyata dengan elemen CGI untuk menciptakan pemandangan yang terlihat sangat realistis dan menyatu dengan sempurna. Detail pencahayaan dan tekstur sangat diperhatikan."
+  },
+  {
+    id: 3,
+    title: "Project 3",
+    category: "Showreel",
+    videoSrc: "",
+    bgGradient: "linear-gradient(135deg, #FE7743 0%, #c45a30 40%, #000000 100%)",
+    blur1Class: "absolute top-10 right-10 w-20 h-20 rounded-full blur-2xl",
+    blur1Bg: "#EFEEEA30",
+    blur2Class: "absolute bottom-20 left-10 w-24 h-24 rounded-full blur-2xl",
+    blur2Bg: "#00000040",
+    iconBg: "rgba(0,0,0,0.3)",
+    iconBorder: "rgba(239,238,234,0.2)",
+    iconColor: "#EFEEEA",
+    iconName: "animation",
+    tagLabel: "2D Anim",
+    badgeLabel: "2D ANIMATION",
+    desc: "Ini adalah Project 3. Sebuah karya 2D Animation yang menceritakan narasi brand melalui animasi vektor yang fluid dan ekspresif. Kami menggunakan teknik keyframing yang teliti untuk memastikan setiap gerakan karakter dan objek terasa hidup, organik, dan penuh dengan kepribadian."
+  }
+];
 
 function App() {
   const [videoState, setVideoState] = useState({ src: null, rect: null, isExpanding: false });
   const [expandedDesc, setExpandedDesc] = useState({});
+  const [activeFilter, setActiveFilter] = useState('All');
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    if (gridRef.current) {
+      gsap.fromTo(
+        gridRef.current.children,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power3.out",
+          overwrite: "auto",
+        }
+      );
+    }
+  }, [activeFilter]);
 
   const toggleDesc = (e, id) => {
     e.stopPropagation();
@@ -216,271 +294,108 @@ function App() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 stagger">
-              {/* Project Card 1 — 3D Motion */}
-              <div
-                className="group cursor-pointer"
-                onClick={(e) => handleVideoClick(e, "/Project/alvinProject-1.mp4")}
-              >
-                <div
-                  className="project-thumbnail aspect-[16/9] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #FE7743 100%)",
-                  }}
+            {/* Category Tabs */}
+            <div className="flex flex-wrap gap-4 mb-12 reveal">
+              {['All', 'Showreel', 'Commercial'].map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveFilter(tab)}
+                  className={`px-6 py-2 rounded-full font-label text-xs uppercase tracking-widest transition-all duration-300 border ${activeFilter === tab
+                    ? 'bg-primary-container text-white border-primary-container'
+                    : 'bg-transparent text-neutral-500 border-neutral-300 hover:border-primary-container hover:text-primary-container'
+                    }`}
                 >
-                  {/* Decorative bg elements */}
-                  <div
-                    className="absolute inset-0 opacity-10"
-                    style={{
-                      backgroundImage:
-                        "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)",
-                      backgroundSize: "32px 32px",
-                    }}
-                  ></div>
-                  <div
-                    className="absolute top-8 right-8 w-24 h-24 rounded-full blur-2xl"
-                    style={{ background: "#FE774340" }}
-                  ></div>
-                  <div
-                    className="absolute bottom-16 left-6 w-16 h-16 rounded-full blur-xl"
-                    style={{ background: "#EFEEEA20" }}
-                  ></div>
+                  {tab}
+                </button>
+              ))}
+            </div>
 
-                  {/* Icon cluster */}
-                  <div className="relative z-10 flex flex-col items-center gap-4 group-hover:scale-110 transition-transform duration-500">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 stagger" ref={gridRef}>
+              {projectsData
+                .filter((p) => activeFilter === 'All' || p.category === activeFilter)
+                .map((project, index) => (
+                  <div
+                    key={project.id}
+                    className={`group cursor-pointer ${index % 3 === 1 ? 'md:translate-y-12' : ''}`}
+                    onClick={(e) => project.videoSrc && handleVideoClick(e, project.videoSrc)}
+                  >
                     <div
-                      className="w-24 h-24 rounded-2xl backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500"
-                      style={{
-                        background: "rgba(254,119,67,0.15)",
-                        borderColor: "rgba(254,119,67,0.2)",
-                      }}
+                      className="project-thumbnail aspect-[16/9] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
+                      style={{ background: project.bgGradient }}
                     >
-                      <span
-                        className="material-symbols-outlined"
+                      {/* Decorative bg elements */}
+                      <div
+                        className="absolute inset-0 opacity-10"
                         style={{
-                          fontSize: "48px",
-                          fontVariationSettings: "'FILL' 1",
-                          color: "#FE7743",
+                          backgroundImage:
+                            'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)',
+                          backgroundSize: '32px 32px',
                         }}
-                      >
-                        3d_rotation
+                      ></div>
+                      <div className={project.blur1Class} style={{ background: project.blur1Bg }}></div>
+                      <div className={project.blur2Class} style={{ background: project.blur2Bg }}></div>
+
+                      {/* Icon cluster */}
+                      <div className="relative z-10 flex flex-col items-center gap-4 group-hover:scale-110 transition-transform duration-500">
+                        <div
+                          className="w-24 h-24 rounded-2xl backdrop-blur-sm border flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500"
+                          style={{
+                            background: project.iconBg,
+                            borderColor: project.iconBorder,
+                          }}
+                        >
+                          <span
+                            className="material-symbols-outlined"
+                            style={{
+                              fontSize: '48px',
+                              fontVariationSettings: "'FILL' 1",
+                              color: project.iconColor,
+                            }}
+                          >
+                            {project.iconName}
+                          </span>
+                        </div>
+                        <span
+                          className="text-[10px] uppercase tracking-[0.3em] font-label"
+                          style={{ color: '#EFEEEA80' }}
+                        >
+                          {project.tagLabel}
+                        </span>
+                      </div>
+
+                      {/* Video */}
+                      <video
+                        src={project.videoSrc}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 ${!project.videoSrc ? 'hidden' : ''}`}
+                        muted
+                        loop
+                        autoPlay
+                        playsInline
+                      ></video>
+
+                      {/* Badge */}
+                      <div className="absolute bottom-4 left-4 z-20">
+                        <span className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">
+                          {project.badgeLabel}
+                        </span>
+                      </div>
+                    </div>
+                    <h3 className="text-2xl font-headline font-bold mb-1 text-neutral-900 uppercase">
+                      {project.title}
+                    </h3>
+                    <div
+                      className="text-neutral-400 font-label text-xs tracking-widest leading-relaxed mt-2"
+                      onClick={(e) => toggleDesc(e, project.id)}
+                    >
+                      <p className={`transition-all duration-300 ${expandedDesc[project.id] ? '' : 'line-clamp-2'}`}>
+                        {project.desc}
+                      </p>
+                      <span className="text-orange-500 font-bold hover:text-orange-600 transition-colors cursor-pointer mt-1 inline-block uppercase text-[10px]">
+                        {expandedDesc[project.id] ? 'Show Less' : 'Read More'}
                       </span>
                     </div>
-                    <span
-                      className="text-[10px] uppercase tracking-[0.3em] font-label"
-                      style={{ color: "#EFEEEA80" }}
-                    >
-                      3D Motion
-                    </span>
                   </div>
-
-                  {/* Video (akan ditampilkan saat ada src) */}
-                  <video
-                    src="/Project/alvinProject-1.mp4"
-                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-                    muted
-                    loop
-                    autoPlay
-                    playsInline
-                  ></video>
-
-                  {/* Badge */}
-                  <div className="absolute bottom-4 left-4 z-20">
-                    <span className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">
-                      3D MOTION
-                    </span>
-                  </div>
-                </div>
-                <h3 className="text-2xl font-headline font-bold uppercase mb-1 text-neutral-900">
-                  Project 1
-                </h3>
-                <div
-                  className="text-neutral-400 font-label text-xs tracking-widest leading-relaxed mt-2"
-                  onClick={(e) => toggleDesc(e, 1)}
-                >
-                  <p className={`transition-all duration-300 ${expandedDesc[1] ? '' : 'line-clamp-2'}`}>
-                    Ledgr is a simple and powerful transaction tracker that helps you monitor your finances and grow your money with clarity and control.
-                  </p>
-                  <span className="text-orange-500 font-bold hover:text-orange-600 transition-colors cursor-pointer mt-1 inline-block uppercase text-[10px]">
-                    {expandedDesc[1] ? "Show Less" : "Read More"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Project Card 2 — VFX */}
-              <div className="group cursor-pointer md:translate-y-12">
-                <div
-                  className="project-thumbnail aspect-[16/9] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #000000 0%, #111111 50%, #EFEEEA 100%)",
-                  }}
-                >
-                  {/* Decorative bg elements */}
-                  <div
-                    className="absolute inset-0 opacity-10"
-                    style={{
-                      backgroundImage:
-                        "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)",
-                      backgroundSize: "32px 32px",
-                    }}
-                  ></div>
-                  <div
-                    className="absolute top-12 left-8 w-20 h-20 rounded-full blur-2xl"
-                    style={{ background: "#FE774330" }}
-                  ></div>
-                  <div
-                    className="absolute bottom-12 right-8 w-28 h-28 rounded-full blur-2xl"
-                    style={{ background: "#EFEEEA25" }}
-                  ></div>
-
-                  {/* Icon cluster */}
-                  <div className="relative z-10 flex flex-col items-center gap-4 group-hover:scale-110 transition-transform duration-500">
-                    <div
-                      className="w-24 h-24 rounded-2xl backdrop-blur-sm border flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500"
-                      style={{
-                        background: "rgba(239,238,234,0.1)",
-                        borderColor: "rgba(239,238,234,0.15)",
-                      }}
-                    >
-                      <span
-                        className="material-symbols-outlined"
-                        style={{
-                          fontSize: "48px",
-                          fontVariationSettings: "'FILL' 1",
-                          color: "#FE7743",
-                        }}
-                      >
-                        auto_awesome
-                      </span>
-                    </div>
-                    <span
-                      className="text-[10px] uppercase tracking-[0.3em] font-label"
-                      style={{ color: "#EFEEEA60" }}
-                    >
-                      Visual FX
-                    </span>
-                  </div>
-
-                  {/* Video */}
-                  <video
-                    data-src=""
-                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 hidden"
-                    muted
-                    loop
-                    playsInline
-                  ></video>
-
-                  {/* Badge */}
-                  <div className="absolute bottom-4 left-4 z-20">
-                    <span className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">
-                      VFX
-                    </span>
-                  </div>
-                </div>
-                <h3 className="text-2xl font-headline font-bold uppercase mb-1 text-neutral-900">
-                  Project 2
-                </h3>
-                <div
-                  className="text-neutral-400 font-label text-xs tracking-widest leading-relaxed mt-2"
-                  onClick={(e) => toggleDesc(e, 2)}
-                >
-                  <p className={`transition-all duration-300 ${expandedDesc[2] ? '' : 'line-clamp-2'}`}>
-                    Ini adalah Project 2. Fokus utama dari proyek ini adalah Visual Effects (VFX) dan compositing. Kami menggabungkan rekaman dunia nyata dengan elemen CGI untuk menciptakan pemandangan yang terlihat sangat realistis dan menyatu dengan sempurna. Detail pencahayaan dan tekstur sangat diperhatikan.
-                  </p>
-                  <span className="text-orange-500 font-bold hover:text-orange-600 transition-colors cursor-pointer mt-1 inline-block uppercase text-[10px]">
-                    {expandedDesc[2] ? "Show Less" : "Read More"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Project Card 3 — 2D Animation */}
-              <div className="group cursor-pointer">
-                <div
-                  className="project-thumbnail aspect-[16/9] rounded-DEFAULT overflow-hidden mb-6 relative flex items-center justify-center"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #FE7743 0%, #c45a30 40%, #000000 100%)",
-                  }}
-                >
-                  {/* Decorative bg elements */}
-                  <div
-                    className="absolute inset-0 opacity-10"
-                    style={{
-                      backgroundImage:
-                        "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)",
-                      backgroundSize: "32px 32px",
-                    }}
-                  ></div>
-                  <div
-                    className="absolute top-10 right-10 w-20 h-20 rounded-full blur-2xl"
-                    style={{ background: "#EFEEEA30" }}
-                  ></div>
-                  <div
-                    className="absolute bottom-20 left-10 w-24 h-24 rounded-full blur-2xl"
-                    style={{ background: "#00000040" }}
-                  ></div>
-
-                  {/* Icon cluster */}
-                  <div className="relative z-10 flex flex-col items-center gap-4 group-hover:scale-110 transition-transform duration-500">
-                    <div
-                      className="w-24 h-24 rounded-2xl backdrop-blur-sm border flex items-center justify-center shadow-lg shadow-black/20 transition-colors duration-500"
-                      style={{
-                        background: "rgba(0,0,0,0.3)",
-                        borderColor: "rgba(239,238,234,0.2)",
-                      }}
-                    >
-                      <span
-                        className="material-symbols-outlined"
-                        style={{
-                          fontSize: "48px",
-                          fontVariationSettings: "'FILL' 1",
-                          color: "#EFEEEA",
-                        }}
-                      >
-                        animation
-                      </span>
-                    </div>
-                    <span
-                      className="text-[10px] uppercase tracking-[0.3em] font-label"
-                      style={{ color: "#EFEEEA80" }}
-                    >
-                      2D Anim
-                    </span>
-                  </div>
-
-                  {/* Video */}
-                  <video
-                    data-src=""
-                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 hidden"
-                    muted
-                    loop
-                    playsInline
-                  ></video>
-
-                  {/* Badge */}
-                  <div className="absolute bottom-4 left-4 z-20">
-                    <span className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">
-                      2D ANIMATION
-                    </span>
-                  </div>
-                </div>
-                <h3 className="text-2xl font-headline font-bold uppercase mb-1 text-neutral-900">
-                  Project 3
-                </h3>
-                <div
-                  className="text-neutral-400 font-label text-xs tracking-widest leading-relaxed mt-2"
-                  onClick={(e) => toggleDesc(e, 3)}
-                >
-                  <p className={`transition-all duration-300 ${expandedDesc[3] ? '' : 'line-clamp-2'}`}>
-                    Ini adalah Project 3. Sebuah karya 2D Animation yang menceritakan narasi brand melalui animasi vektor yang fluid dan ekspresif. Kami menggunakan teknik keyframing yang teliti untuk memastikan setiap gerakan karakter dan objek terasa hidup, organik, dan penuh dengan kepribadian.
-                  </p>
-                  <span className="text-orange-500 font-bold hover:text-orange-600 transition-colors cursor-pointer mt-1 inline-block uppercase text-[10px]">
-                    {expandedDesc[3] ? "Show Less" : "Read More"}
-                  </span>
-                </div>
-              </div>
+                ))}
             </div>
           </div>
         </section>

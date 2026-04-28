@@ -25,7 +25,7 @@ export function initContactForm() {
       submitBtn.classList.add('opacity-70');
 
       // Format the WhatsApp message
-      const phoneNumber = "6285180536854"; // GANTI DENGAN NOMOR WA KLIEN (format kode negara tanpa +, e.g: 62...)
+      const phoneNumber = "6281919351555"; // GANTI DENGAN NOMOR WA KLIEN (format kode negara tanpa +, e.g: 62...)
 
       let waText = `Halo Alvin!\n\nNama saya ${nameInput.value}.\nEmail: ${emailInput.value}\n`;
       if (serviceInput && serviceInput.value) {
